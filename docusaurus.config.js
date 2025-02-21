@@ -1,28 +1,24 @@
 // @ts-check
-import { themes as prismThemes } from "prism-react-renderer";
+// `@type` JSDoc annotations allow editor autocompletion and type checking
+
+const prismThemes = require("prism-react-renderer").themes; // Use require instead of import
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "My Docs",
-  tagline: "Documentation powered by Docusaurus",
+  title: "My Site",
+  tagline: "Dinosaurs are cool",
   favicon: "img/favicon.ico",
 
-<<<<<<< HEAD
-  // Set the production url of your site here
-  url: 'https://Deloitte_gloal_cloud_services.github.io',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/my-docs/',
-=======
-  // Set correct production URL
-  url: "https://Cirruslabs.github.io",
-  // Set base URL to match the repository name
-  baseUrl: "/my-docs/",
->>>>>>> 569c427 (commit)
+  // Set the production URL of your site here
+  url: "https://chiranjeevi-m-n.github.io", // Change to your GitHub username
 
-  // GitHub Pages deployment config
-  organizationName: "Cirruslabs", // Your GitHub username
-  projectName: "my-docs", // Your repo name
+  // Base URL for GitHub Pages deployment
+  baseUrl: "/my-docs/", // Ensure this matches your GitHub repo name
+
+  // GitHub pages deployment config
+  organizationName: "chiranjeevi-m-n", // Your GitHub username
+  projectName: "my-docs", // Your repository name
+  deploymentBranch: "gh-pages", // Deployment branch
 
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -38,17 +34,22 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       {
         docs: {
-          sidebarPath: "./sidebars.js",
-          editUrl:
-            "https://github.com/chiranjeevi-m-n/my-docs/edit/main/", // Update edit URL
+          sidebarPath: require.resolve("./sidebars.js"),
+          editUrl: "https://github.com/chiranjeevi-m-n/my-docs/edit/main/",
         },
         blog: {
           showReadingTime: true,
-          editUrl:
-            "https://github.com/chiranjeevi-m-n/my-docs/edit/main/blog/", // Update edit URL
+          feedOptions: {
+            type: ["rss", "atom"],
+            xslt: true,
+          },
+          editUrl: "https://github.com/chiranjeevi-m-n/my-docs/edit/main/",
+          onInlineTags: "warn",
+          onInlineAuthors: "warn",
+          onUntruncatedBlogPosts: "warn",
         },
         theme: {
-          customCss: "./src/css/custom.css",
+          customCss: require.resolve("./src/css/custom.css"),
         },
       },
     ],
@@ -59,9 +60,9 @@ const config = {
     {
       image: "img/docusaurus-social-card.jpg",
       navbar: {
-        title: "My Docs",
+        title: "My Site",
         logo: {
-          alt: "My Docs Logo",
+          alt: "My Site Logo",
           src: "img/logo.svg",
         },
         items: [
@@ -69,7 +70,7 @@ const config = {
             type: "docSidebar",
             sidebarId: "tutorialSidebar",
             position: "left",
-            label: "Docs",
+            label: "Tutorial",
           },
           { to: "/blog", label: "Blog", position: "left" },
           {
@@ -81,7 +82,7 @@ const config = {
       },
       footer: {
         style: "dark",
-        copyright: `Copyright © ${new Date().getFullYear()} My Docs. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,
@@ -90,4 +91,4 @@ const config = {
     },
 };
 
-export default config;
+module.exports = config; // Ensure this is correct
