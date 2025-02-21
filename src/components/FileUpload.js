@@ -31,6 +31,7 @@ const FileUpload = () => {
           fileContent: base64File,
         }),
       });
+      
 
       const result = await response.json();
 

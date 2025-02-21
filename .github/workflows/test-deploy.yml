@@ -1,0 +1,43 @@
+name: Test Deployment
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-deploy:
+    name: Test Build and Backend Setup
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set Environment Variables
+        run: |
+          echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+          echo "OWNER=${{ secrets.OWNER }}" >> $GITHUB_ENV
+          echo "REPO=${{ secrets.REPO }}" >> $GITHUB_ENV
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      # ✅ Install Backend Dependencies
+      - name: Install Backend Dependencies
+        run: npm ci --legacy-peer-deps
+        working-directory: ./server
+
+      # ✅ Install Frontend Dependencies
+      - name: Install Frontend Dependencies
+        run: npm ci --legacy-peer-deps
+
+      # ✅ Test Build Frontend
+      - name: Test Build Docusaurus
+        run: npm run build --verbose
